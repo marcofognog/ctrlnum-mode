@@ -61,10 +61,11 @@
   )
 
 (defun ordered-switch (num)
-  (if (< num (+ 1 (length mybuffs)))
+  (if (< num (length mybuffs))
   (switch-to-buffer (seq-elt mybuffs num))
   nil
   )
+)
 
 (global-set-key (kbd "C-1") 'ordered-switch-1)
 (global-set-key (kbd "C-2") 'ordered-switch-2)
