@@ -1,3 +1,5 @@
+(setq mybuffs (list))
+
 (defun copy-buff-keep-order ()
   "asfsd"
   (interactive)
@@ -17,6 +19,4 @@
   )
 
 (global-set-key (kbd "C-3") 'ordered-switch-3)
-
-(print-elements-of-list mybuffs)
 (copy-buff-keep-order)
