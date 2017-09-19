@@ -1,16 +1,22 @@
 (defun copy-buff-keep-order ()
   "asfsd"
+  (interactive)
   (progn
     (setq mybuffs (append mybuffs (seq-difference (buffer-list) mybuffs)))
     (setq mybuffs (seq-filter (lambda (elt) (seq-contains (buffer-list) elt)) mybuffs))
     )
   )
 
-(defun print-elements-of-list (list)
-  "Print each element of LIST on a line of its own."
-  (while list
-    (print (car list))
-    (setq list (cdr list))))
+(defun ordered-switch-3()
+  (interactive)
+  (ordered-switch 3)
+  )
+
+(defun ordered-switch (num)
+  (pop-to-buffer (seq-elt mybuffs num))
+  )
+
+(global-set-key (kbd "C-3") 'ordered-switch-3)
 
 (print-elements-of-list mybuffs)
 (copy-buff-keep-order)
