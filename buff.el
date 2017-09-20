@@ -48,3 +48,20 @@
          (setq list (cdr list))))
 
 (print-elements-of-list file-buffs)
+
+(define-minor-mode ctrlnum-mode
+  "Google Chrome's tab like swicthing for buffers"
+  :lighter " ctrlnum"
+  :global t
+  :keymap (let ((map (make-sparse-keymap)))
+            (define-key map (kbd "C-1") 'ordered-switch-1)
+            (define-key map (kbd "C-2") 'ordered-switch-2)
+            (define-key map (kbd "C-3") 'ordered-switch-3)
+            (define-key map (kbd "C-4") 'ordered-switch-4)
+            (define-key map (kbd "C-5") 'ordered-switch-5)
+            (define-key map (kbd "C-6") 'ordered-switch-6)
+            (define-key map (kbd "C-7") 'ordered-switch-7)
+            (define-key map (kbd "C-8") 'ordered-switch-8)
+            (define-key map (kbd "C-9") 'ordered-switch-9)
+            (define-key map (kbd "C-0") 'ordered-switch-0)
+            map))
