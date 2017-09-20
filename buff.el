@@ -29,17 +29,6 @@
   )
 )
 
-(global-set-key (kbd "C-1") 'ordered-switch-1)
-(global-set-key (kbd "C-2") 'ordered-switch-2)
-(global-set-key (kbd "C-3") 'ordered-switch-3)
-(global-set-key (kbd "C-4") 'ordered-switch-4)
-(global-set-key (kbd "C-5") 'ordered-switch-5)
-(global-set-key (kbd "C-6") 'ordered-switch-6)
-(global-set-key (kbd "C-7") 'ordered-switch-7)
-(global-set-key (kbd "C-8") 'ordered-switch-8)
-(global-set-key (kbd "C-9") 'ordered-switch-9)
-(global-set-key (kbd "C-0") 'ordered-switch-10)
-
 (ctrlnum-update)
 
 (defun print-elements-of-list (list)
@@ -65,4 +54,5 @@
             (define-key map (kbd "C-8") 'ordered-switch-8)
             (define-key map (kbd "C-9") 'ordered-switch-9)
             (define-key map (kbd "C-0") 'ordered-switch-10)
+            (define-key map (kbd "C-c u") 'ctrlnum-update)
             map))
