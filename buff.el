@@ -1,6 +1,6 @@
 (setq mybuffs (list))
 
-(defun copy-buff-keep-order ()
+(defun ctrlnum-update ()
   "asfsd"
   (interactive)
   (progn
@@ -19,7 +19,7 @@
 (defun ordered-switch-7() (interactive) (ordered-switch 6) )
 (defun ordered-switch-8() (interactive) (ordered-switch 7) )
 (defun ordered-switch-9() (interactive) (ordered-switch 8) )
-(defun ordered-switch-0() (interactive) (ordered-switch 9) )
+(defun ordered-switch-10() (interactive) (ordered-switch 9) )
 
 
 (defun ordered-switch (num)
@@ -38,8 +38,9 @@
 (global-set-key (kbd "C-7") 'ordered-switch-7)
 (global-set-key (kbd "C-8") 'ordered-switch-8)
 (global-set-key (kbd "C-9") 'ordered-switch-9)
-(global-set-key (kbd "C-0") 'ordered-switch-0)
-(copy-buff-keep-order)
+(global-set-key (kbd "C-0") 'ordered-switch-10)
+
+(ctrlnum-update)
 
 (defun print-elements-of-list (list)
        "Print each element of LIST on a line of its own."
@@ -50,7 +51,7 @@
 (print-elements-of-list file-buffs)
 
 (define-minor-mode ctrlnum-mode
-  "Google Chrome's tab like swicthing for buffers"
+  "Google Chrome's tab swicthing style for buffers"
   :lighter " ctrlnum"
   :global t
   :keymap (let ((map (make-sparse-keymap)))
@@ -63,5 +64,5 @@
             (define-key map (kbd "C-7") 'ordered-switch-7)
             (define-key map (kbd "C-8") 'ordered-switch-8)
             (define-key map (kbd "C-9") 'ordered-switch-9)
-            (define-key map (kbd "C-0") 'ordered-switch-0)
+            (define-key map (kbd "C-0") 'ordered-switch-10)
             map))
