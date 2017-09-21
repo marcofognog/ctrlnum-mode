@@ -1,7 +1,7 @@
 (setq mybuffs (list))
 
 (defun ctrlnum-update ()
-  "asfsd"
+  "Update the ordered file buffer list."
   (interactive)
   (progn
     (setq file-buffs (seq-filter (lambda (elt) (buffer-file-name elt)) (buffer-list)))
