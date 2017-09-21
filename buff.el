@@ -37,7 +37,7 @@
          (print (car list))
          (setq list (cdr list))))
 
-(print-elements-of-list file-buffs)
+(add-hook 'buffer-list-update-hook 'ctrlnum-update)
 
 (define-minor-mode ctrlnum-mode
   "Google Chrome's tab swicthing style for buffers"
