@@ -29,6 +29,20 @@
   )
 )
 
+(defun ctrlnum-extract-name(buff)
+  "..."
+  (progn
+    (concat "[" (number-to-string (cl-position buff mybuffs)) "]" (file-name-nondirectory (buffer-file-name buff)))
+    )
+  )
+
+(defun ctrlnum-print-positions()
+  "print file positions"
+  (interactive)
+    (setq tabstring (mapconcat 'identity (mapcar 'ctrlnum-extract-name mybuffs) " "))
+    (message tabstring)
+    )
+
 (ctrlnum-update)
 
 (defun print-elements-of-list (list)
