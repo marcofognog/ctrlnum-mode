@@ -27,12 +27,13 @@
   (switch-to-buffer (seq-elt mybuffs num))
   nil
   )
+  (ctrlnum-print-positions)
 )
 
 (defun ctrlnum-build-name(buff)
   "..."
   (progn
-    (if (eq (current-buffer) buff) (setq mark (string "*")) (setq mark "") )
+    (if (eq (current-buffer) buff) (setq mark "*") (setq mark "") )
     (concat "[" (number-to-string (cl-position buff mybuffs)) "]" mark (file-name-nondirectory (buffer-file-name buff)))
     )
   )
