@@ -21,7 +21,6 @@
 (defun ctrlnum-switch-9() (interactive) (ctrlnum-switch 8) )
 (defun ctrlnum-switch-10() (interactive) (ctrlnum-switch 9) )
 
-
 (defun ctrlnum-switch (num)
   (if (< num (length mybuffs))
   (switch-to-buffer (seq-elt mybuffs num))
@@ -45,14 +44,13 @@
     (message tabstring)
     )
 
-(ctrlnum-update)
-
 (defun print-elements-of-list (list)
        "Print each element of LIST on a line of its own."
        (while list
          (print (car list))
          (setq list (cdr list))))
 
+(ctrlnum-update)
 (add-hook 'buffer-list-update-hook 'ctrlnum-update)
 
 (define-minor-mode ctrlnum-mode
