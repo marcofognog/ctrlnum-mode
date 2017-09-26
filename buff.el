@@ -34,7 +34,7 @@
   "..."
   (progn
     (if (eq (current-buffer) buff) (setq mark "*") (setq mark "") )
-    (concat "[" (number-to-string (cl-position buff mybuffs)) "]" mark (file-name-nondirectory (buffer-file-name buff)))
+    (concat (number-to-string (cl-position buff mybuffs)) "." mark (file-name-nondirectory (buffer-file-name buff)))
     )
   )
 
