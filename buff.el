@@ -29,17 +29,18 @@
   )
 )
 
-(defun ctrlnum-extract-name(buff)
+(defun ctrlnum-build-name(buff)
   "..."
   (progn
-    (concat "[" (number-to-string (cl-position buff mybuffs)) "]" (file-name-nondirectory (buffer-file-name buff)))
+    (if (eq (current-buffer) buff) (setq mark (string "*")) (setq mark "") )
+    (concat "[" (number-to-string (cl-position buff mybuffs)) "]" mark (file-name-nondirectory (buffer-file-name buff)))
     )
   )
 
 (defun ctrlnum-print-positions()
   "print file positions"
   (interactive)
-    (setq tabstring (mapconcat 'identity (mapcar 'ctrlnum-extract-name mybuffs) " "))
+    (setq tabstring (mapconcat 'identity (mapcar 'ctrlnum-build-name mybuffs) " "))
     (message tabstring)
     )
 
