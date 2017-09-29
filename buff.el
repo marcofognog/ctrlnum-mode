@@ -7,6 +7,7 @@
     (setq file-buffs (seq-filter (lambda (elt) (buffer-file-name elt)) (buffer-list)))
     (setq mybuffs (append mybuffs (seq-difference file-buffs mybuffs)))
     (setq mybuffs (seq-filter (lambda (elt) (seq-contains file-buffs elt)) mybuffs))
+    (delete-dups mybuffs) ;; why do we need this?
     )
   )
 
