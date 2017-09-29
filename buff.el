@@ -47,14 +47,37 @@
 (defun ctrlnum-next()
   "switch to the next buffer in the ordered list"
   (interactive)
-  (ctrlnum-switch (+ 1 (cl-position (current-buffer) mybuffs)))
+  (ctrlnum-switch (ctrlnum-next-buffer))
   )
 
 (defun ctrlnum-previous()
   "switch to the previous buffer in the ordered list"
   (interactive)
-  (ctrlnum-switch (- 1 (cl-position (current-buffer) mybuffs)))
+  (ctrlnum-switch (ctrlnum-previous-buffer))
   )
+
+(defun ctrlnum-next-buffer()
+  (+ 1 (cl-position (current-buffer) mybuffs))
+  )
+j
+(defun ctrlnum-previous-buffer()
+  (- 1 (cl-position (current-buffer) mybuffs))
+  )
+
+(defun ctrlnum-switch-order-prev()
+  "switch order with previous buffer"
+  (interactive)
+  (progn
+    (setq posi (cl-position (current-buffer) mybuffs))
+    (setq first-half (seq-take mybuffs (- posi 1)))
+    (setq last-half (seq-drop mybuffs (+ posi 1)))
+    (setq first-half-p (append first-half (list (current-buffer))))
+    (setq last-half-p (cons (nth (ctrlnum-previous-buffer) mybuffs) last-half))
+    (append first-half-p last-half-p)
+    )
+  )
+
+(print-elements-of-list (ctrlnum-switch-order-prev))
 
 (defun print-elements-of-list (list)
   "Print each element of LIST on a line of its own."
