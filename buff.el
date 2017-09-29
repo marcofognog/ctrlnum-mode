@@ -90,13 +90,21 @@
 (defun ctrlnum-switch-order-next()
   "switch order with next buffer"
   (interactive)
+  (progn
     (setq mybuffs (ctrlnum-switch-order-list-forward))
+    (ctrlnum-update)
+    (ctrlnum-print-positions)
+    )
   )
 
 (defun ctrlnum-switch-order-prev()
   "switch order with previous buffer"
   (interactive)
+  (progn
     (setq mybuffs (ctrlnum-switch-order-list-back))
+    (ctrlnum-update)
+    (ctrlnum-print-positions)
+    )
   )
 
 
@@ -112,6 +120,8 @@
 ;; overwritting default maps (left-scroll)
 (global-set-key (kbd "C-<next>") 'ctrlnum-next)
 (global-set-key (kbd "C-<prior>") 'ctrlnum-previous)
+(global-set-key [\C-\S-prior] 'ctrlnum-switch-order-prev)
+(global-set-key [\C-\S-next] 'ctrlnum-switch-order-next)
 
 (define-minor-mode ctrlnum-mode
   "Google Chrome's tab swicthing style for buffers"
