@@ -23,11 +23,11 @@
 
 (defun ctrlnum-switch (num)
   (if (< num (length mybuffs))
-  (switch-to-buffer (seq-elt mybuffs num))
-  nil
-  )
+      (switch-to-buffer (seq-elt mybuffs num))
+    nil
+    )
   (ctrlnum-print-positions)
-)
+  )
 
 (defun ctrlnum-build-name(buff)
   "..."
@@ -40,18 +40,34 @@
 (defun ctrlnum-print-positions()
   "print file positions"
   (interactive)
-    (setq tabstring (mapconcat 'identity (mapcar 'ctrlnum-build-name mybuffs) " "))
-    (message tabstring)
-    )
+  (setq tabstring (mapconcat 'identity (mapcar 'ctrlnum-build-name mybuffs) " "))
+  (message tabstring)
+  )
+
+(defun ctrlnum-next()
+  "switch to the next buffer in the ordered list"
+  (interactive)
+  (ctrlnum-switch (+ 1 (cl-position (current-buffer) mybuffs)))
+  )
+
+(defun ctrlnum-previous()
+  "switch to the previous buffer in the ordered list"
+  (interactive)
+  (ctrlnum-switch (- 1 (cl-position (current-buffer) mybuffs)))
+  )
 
 (defun print-elements-of-list (list)
-       "Print each element of LIST on a line of its own."
-       (while list
-         (print (car list))
-         (setq list (cdr list))))
+  "Print each element of LIST on a line of its own."
+  (while list
+    (print (car list))
+    (setq list (cdr list))))
 
 (ctrlnum-update)
 (add-hook 'buffer-list-update-hook 'ctrlnum-update)
+
+;; overwritting default maps (left-scroll)
+(global-set-key (kbd "C-<next>") 'ctrlnum-next)
+(global-set-key (kbd "C-<prior>") 'ctrlnum-previous)
 
 (define-minor-mode ctrlnum-mode
   "Google Chrome's tab swicthing style for buffers"
@@ -70,3 +86,4 @@
             (define-key map (kbd "C-0") 'ctrlnum-switch-10)
             (define-key map (kbd "C-c u") 'ctrlnum-update)
             map))
+
