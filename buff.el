@@ -65,7 +65,7 @@
   (- 1 (cl-position (current-buffer) mybuffs))
   )
 
-(defun ctrlnum-switch-order-list()
+(defun ctrlnum-switch-order-list-back()
   (progn
     (setq posi (cl-position (current-buffer) mybuffs))
     (setq first-half (seq-take mybuffs (- posi 1)))
@@ -76,13 +76,29 @@
     )
   )
 
+(defun ctrlnum-switch-order-list-forward()
+  (progn
+    (setq posi (cl-position (current-buffer) mybuffs))
+    (setq first-half (seq-take mybuffs posi))
+    (setq last-half (seq-drop mybuffs (+ posi 2)))
+    (setq first-half-p (append first-half (list (nth (ctrlnum-next-buffer) mybuffs))))
+    (setq last-half-p (cons (current-buffer) last-half))
+    (append first-half-p last-half-p)
+    )
+  )
+
+(defun ctrlnum-switch-order-next()
+  "switch order with next buffer"
+  (interactive)
+    (setq mybuffs (ctrlnum-switch-order-list-forward))
+  )
+
 (defun ctrlnum-switch-order-prev()
   "switch order with previous buffer"
   (interactive)
-    (setq mybuffs (ctrlnum-switch-order-list))
+    (setq mybuffs (ctrlnum-switch-order-list-back))
   )
 
-(print-elements-of-list (ctrlnum-switch-order-list))
 
 (defun print-elements-of-list (list)
   "Print each element of LIST on a line of its own."
