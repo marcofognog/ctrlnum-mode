@@ -1,10 +1,36 @@
 ;;; ctrlnum.el --- Tab switching style for file buffers with C-[0..9] keys like popular brosers.
 
+;; Copyright (C) 2017 Marco A. F. Nogueira
+
+;; Author: Marco A. F. Nogueira <marcofognog@gmail.com>
+;; Version: 1.0
+;; Package-Requires ((cl-lib "0.5"))
+;; Keywords: buffer, tabs
+;; URL: https://github.com/marcofognog/ctrlnum.el
+
 ;;; Commentary:
+
+;; Conveniently switch between file buffers just like you would with
+;; Google Chrome's tabs default key bindings:
+;;
+;; C-1 switches to the first file buffer
+;; C-2 switches to the second file buffer
+;; ...
+;; C-0 switched to the 10th file buffer
+;;
+;; C-<prior> in buffer causes that buffer to switch place with the previous buffer
+;; C-<next> the same as the above, but in the other direction
+;;
+;; Because the native emacs buffer-list is kept intact, you can still use all the
+;; other buffer switching tactics you already have.
+
+;; Or:
 ;; ctrlnum is a global minor mode for those who like to have the buffers with a fixed position in a list
 ;; so you don't need to search for a file buffer every time while coding.
 ;; Just like Google Chrome and Sublime Text defaults (and many others) your
 ;; file buffers could be switched by C-NUM, where NUM ranges from 0 to 9.
+
+;; Full documentation is available as an Info manual.
 
 ;;; Code:
 
