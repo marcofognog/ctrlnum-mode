@@ -21,7 +21,7 @@
 ;; C-<prior> in buffer causes that buffer to switch place with the previous buffer
 ;; C-<next> the same as the above, but in the other direction
 ;;
-;; Because the native emacs buffer-list is kept intact, you can still use all the
+;; Because the native Emacs buffer-list is kept intact, you can still use all the
 ;; other buffer switching tactics you already have.
 
 ;; Or:
@@ -59,6 +59,7 @@
 (defun ctrlnum-switch-10() (interactive) (ctrlnum-switch 9) )
 
 (defun ctrlnum-switch (num)
+  "Make the switch to a buffer.  Argument NUM : the number in the ordered list to swtich to."
   (if (< num (length mybuffs))
       (switch-to-buffer (seq-elt mybuffs num))
     nil
