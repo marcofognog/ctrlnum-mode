@@ -1,3 +1,13 @@
+;;; ctrlnum.el --- Tab switching style for file buffers with C-[0..9] keys like popular brosers.
+
+;;; Commentary:
+;; ctrlnum is a global minor mode for those who like to have the buffers with a fixed position in a list
+;; so you don't need to search for a file buffer every time while coding.
+;; Just like Google Chrome and Sublime Text defaults (and many others) your
+;; file buffers could be switched by C-NUM, where NUM ranges from 0 to 9.
+
+;;; Code:
+
 (setq mybuffs (list))
 
 (defun ctrlnum-update ()
@@ -31,7 +41,6 @@
   )
 
 (defun ctrlnum-build-name(buff)
-  "..."
   (progn
     (if (eq (current-buffer) buff) (setq mark "*") (setq mark "") )
     (concat (number-to-string (+ 1 (cl-position buff mybuffs))) "." mark (file-name-nondirectory (buffer-file-name buff)))
@@ -39,20 +48,18 @@
   )
 
 (defun ctrlnum-print-positions()
-  "print file positions"
-  (interactive)
   (setq tabstring (mapconcat 'identity (mapcar 'ctrlnum-build-name mybuffs) " "))
   (message tabstring)
   )
 
 (defun ctrlnum-next()
-  "switch to the next buffer in the ordered list"
+  "Switch to the next buffer in the ordered file buffer list"
   (interactive)
   (ctrlnum-switch (ctrlnum-next-buffer))
   )
 
 (defun ctrlnum-previous()
-  "switch to the previous buffer in the ordered list"
+  "Switch to the previous buffer in the ordered file buffer list"
   (interactive)
   (ctrlnum-switch (ctrlnum-previous-buffer))
   )
@@ -88,7 +95,7 @@
   )
 
 (defun ctrlnum-switch-order-next()
-  "switch order with next buffer"
+  "Rearrange buffer position with the next buffer in the list"
   (interactive)
   (progn
     (setq mybuffs (ctrlnum-switch-order-list-forward))
@@ -98,7 +105,7 @@
   )
 
 (defun ctrlnum-switch-order-prev()
-  "switch order with previous buffer"
+  "Rearrange buffer position with the previous buffer in the list"
   (interactive)
   (progn
     (setq mybuffs (ctrlnum-switch-order-list-back))
@@ -106,13 +113,6 @@
     (ctrlnum-print-positions)
     )
   )
-
-
-(defun print-elements-of-list (list)
-  "Print each element of LIST on a line of its own."
-  (while list
-    (print (car list))
-    (setq list (cdr list))))
 
 (ctrlnum-update)
 (add-hook 'buffer-list-update-hook 'ctrlnum-update)
@@ -141,3 +141,6 @@
             (define-key map (kbd "C-c u") 'ctrlnum-update)
             map))
 
+(provide 'ctrlnum)
+
+;;; ctrlnum.el ends here
