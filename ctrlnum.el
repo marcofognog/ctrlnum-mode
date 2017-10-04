@@ -43,7 +43,12 @@
 (defun ctrlnum-build-name(buff)
   (progn
     (if (eq (current-buffer) buff) (setq mark "*") (setq mark "") )
-    (concat (number-to-string (+ 1 (cl-position buff mybuffs))) "." mark (file-name-nondirectory (buffer-file-name buff)))
+    (concat
+     (number-to-string (+ 1 (cl-position buff mybuffs)))
+     "."
+     mark
+     (file-name-nondirectory (buffer-file-name buff))
+     )
     )
   )
 
@@ -64,13 +69,9 @@
   (ctrlnum-switch (ctrlnum-previous-buffer))
   )
 
-(defun ctrlnum-next-buffer()
-  (+ 1 (cl-position (current-buffer) mybuffs))
-  )
+(defun ctrlnum-next-buffer() (+ 1 (cl-position (current-buffer) mybuffs)))
 
-(defun ctrlnum-previous-buffer()
-  (- 1 (cl-position (current-buffer) mybuffs))
-  )
+(defun ctrlnum-previous-buffer() (- 1 (cl-position (current-buffer) mybuffs)))
 
 (defun ctrlnum-switch-order-list-back()
   (progn
@@ -114,9 +115,6 @@
     )
   )
 
-(ctrlnum-update)
-(add-hook 'buffer-list-update-hook 'ctrlnum-update)
-
 (define-minor-mode ctrlnum-mode
   "Google Chrome's tab swicthing style for buffers"
   :lighter " ctrlnum"
@@ -134,6 +132,9 @@
             (define-key map (kbd "C-0") 'ctrlnum-switch-10)
             (define-key map (kbd "C-c u") 'ctrlnum-update)
             map))
+
+(ctrlnum-update)
+(add-hook 'buffer-list-update-hook 'ctrlnum-update)
 
 ;; overwritting default maps (left-scroll)
 (global-set-key (kbd "C-<next>") 'ctrlnum-next)
