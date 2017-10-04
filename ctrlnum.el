@@ -117,12 +117,6 @@
 (ctrlnum-update)
 (add-hook 'buffer-list-update-hook 'ctrlnum-update)
 
-;; overwritting default maps (left-scroll)
-(global-set-key (kbd "C-<next>") 'ctrlnum-next)
-(global-set-key (kbd "C-<prior>") 'ctrlnum-previous)
-(global-set-key [\C-\S-prior] 'ctrlnum-switch-order-prev)
-(global-set-key [\C-\S-next] 'ctrlnum-switch-order-next)
-
 (define-minor-mode ctrlnum-mode
   "Google Chrome's tab swicthing style for buffers"
   :lighter " ctrlnum"
@@ -140,6 +134,12 @@
             (define-key map (kbd "C-0") 'ctrlnum-switch-10)
             (define-key map (kbd "C-c u") 'ctrlnum-update)
             map))
+
+;; overwritting default maps (left-scroll)
+(global-set-key (kbd "C-<next>") 'ctrlnum-next)
+(global-set-key (kbd "C-<prior>") 'ctrlnum-previous)
+(global-set-key [\C-\S-prior] 'ctrlnum-switch-order-prev)
+(global-set-key [\C-\S-next] 'ctrlnum-switch-order-next)
 
 (provide 'ctrlnum)
 
