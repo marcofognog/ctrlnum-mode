@@ -80,11 +80,10 @@
 (defun ctrlnum-build-name(buff)
   (progn
     (if (eq (current-buffer) buff) (setq mark "*") (setq mark "") )
-    (concat
-     (number-to-string (+ 1 (cl-position buff ctrlnum-ordered-buffers)))
-     "."
-     mark
-     (file-name-nondirectory (buffer-file-name buff)))))
+    (concat (number-to-string (+ 1 (cl-position buff ctrlnum-ordered-buffers)))
+            "."
+            mark
+            (file-name-nondirectory (buffer-file-name buff)))))
 
 (defun ctrlnum-print-positions()
   (setq tabstring (mapconcat 'identity (mapcar 'ctrlnum-build-name ctrlnum-ordered-buffers) " "))
