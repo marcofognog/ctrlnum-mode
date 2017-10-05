@@ -41,14 +41,8 @@
 ;; C-S-<prior> in buffer causes that buffer to switch place with the previous buffer
 ;; C-S-<next> the same as the above, but in the other direction
 ;;
-;; Because the native Emacs buffer-list is kept intact, you can still use all the
-;; other buffer switching tactics you already have.
-
-;; Or:
-;; ctrlnum is a global minor mode for those who like to have the buffers with a fixed position in a list
-;; so you don't need to search for a file buffer every time while coding.
-;; Just like Google Chrome and Sublime Text defaults (and many others) your
-;; file buffers could be switched by C-NUM, where NUM ranges from 0 to 9.
+;; Because the native Emacs buffer-list is kept intact, you can still use all
+;; the other buffer switching tactics you already have.
 
 ;; Full documentation is available as an Info manual.
 
