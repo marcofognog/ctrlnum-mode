@@ -43,9 +43,7 @@
     (setq file-buffs (seq-filter (lambda (elt) (buffer-file-name elt)) (buffer-list)))
     (setq ctrlnum-ordered-buffers (append ctrlnum-ordered-buffers (seq-difference file-buffs ctrlnum-ordered-buffers)))
     (setq ctrlnum-ordered-buffers (seq-filter (lambda (elt) (seq-contains file-buffs elt)) ctrlnum-ordered-buffers))
-    (delete-dups ctrlnum-ordered-buffers) ;; why do we need this?
-    )
-  )
+    (delete-dups ctrlnum-ordered-buffers)))
 
 (defun ctrlnum-switch-1() (interactive) (ctrlnum-switch 0) )
 (defun ctrlnum-switch-2() (interactive) (ctrlnum-switch 1) )
@@ -62,10 +60,8 @@
   "Make the switch to a buffer.  Argument NUM : the number in the ordered list to swtich to."
   (if (< num (length ctrlnum-ordered-buffers))
       (switch-to-buffer (seq-elt ctrlnum-ordered-buffers num))
-    nil
-    )
-  (ctrlnum-print-positions)
-  )
+    nil)
+  (ctrlnum-print-positions))
 
 (defun ctrlnum-build-name(buff)
   (progn
@@ -74,27 +70,21 @@
      (number-to-string (+ 1 (cl-position buff ctrlnum-ordered-buffers)))
      "."
      mark
-     (file-name-nondirectory (buffer-file-name buff))
-     )
-    )
-  )
+     (file-name-nondirectory (buffer-file-name buff)))))
 
 (defun ctrlnum-print-positions()
   (setq tabstring (mapconcat 'identity (mapcar 'ctrlnum-build-name ctrlnum-ordered-buffers) " "))
-  (message tabstring)
-  )
+  (message tabstring))
 
 (defun ctrlnum-next()
   "Switch to the next buffer in the ordered file buffer list"
   (interactive)
-  (ctrlnum-switch (ctrlnum-next-buffer))
-  )
+  (ctrlnum-switch (ctrlnum-next-buffer)))
 
 (defun ctrlnum-previous()
   "Switch to the previous buffer in the ordered file buffer list"
   (interactive)
-  (ctrlnum-switch (ctrlnum-previous-buffer))
-  )
+  (ctrlnum-switch (ctrlnum-previous-buffer)))
 
 (defun ctrlnum-next-buffer() (+ 1 (cl-position (current-buffer) ctrlnum-ordered-buffers)))
 
@@ -107,9 +97,7 @@
     (setq last-half (seq-drop ctrlnum-ordered-buffers (+ posi 1)))
     (setq first-half-p (append first-half (list (current-buffer))))
     (setq last-half-p (cons (nth (ctrlnum-previous-buffer) ctrlnum-ordered-buffers) last-half))
-    (append first-half-p last-half-p)
-    )
-  )
+    (append first-half-p last-half-p)))
 
 (defun ctrlnum-switch-order-list-forward()
   (progn
@@ -118,9 +106,7 @@
     (setq last-half (seq-drop ctrlnum-ordered-buffers (+ posi 2)))
     (setq first-half-p (append first-half (list (nth (ctrlnum-next-buffer) ctrlnum-ordered-buffers))))
     (setq last-half-p (cons (current-buffer) last-half))
-    (append first-half-p last-half-p)
-    )
-  )
+    (append first-half-p last-half-p)))
 
 (defun ctrlnum-switch-order-next()
   "Rearrange buffer position with the next buffer in the list"
@@ -128,9 +114,7 @@
   (progn
     (setq ctrlnum-ordered-buffers (ctrlnum-switch-order-list-forward))
     (ctrlnum-update)
-    (ctrlnum-print-positions)
-    )
-  )
+    (ctrlnum-print-positions)))
 
 (defun ctrlnum-switch-order-prev()
   "Rearrange buffer position with the previous buffer in the list"
@@ -138,9 +122,7 @@
   (progn
     (setq ctrlnum-ordered-buffers (ctrlnum-switch-order-list-back))
     (ctrlnum-update)
-    (ctrlnum-print-positions)
-    )
-  )
+    (ctrlnum-print-positions)))
 
 (define-minor-mode ctrlnum-mode
   "Google Chrome's tab swicthing style for buffers"
