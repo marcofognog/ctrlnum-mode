@@ -86,7 +86,9 @@
             (file-name-nondirectory (buffer-file-name buff)))))
 
 (defun ctrlnum-print-positions()
-  (setq tabstring (mapconcat 'identity (mapcar 'ctrlnum-build-name ctrlnum-ordered-buffers) " "))
+  (setq tabstring (mapconcat 'identity
+                             (mapcar 'ctrlnum-build-name ctrlnum-ordered-buffers)
+                             " "))
   (message tabstring))
 
 (defun ctrlnum-next()
@@ -99,9 +101,11 @@
   (interactive)
   (ctrlnum-switch (ctrlnum-previous-buffer)))
 
-(defun ctrlnum-next-buffer() (+ 1 (cl-position (current-buffer) ctrlnum-ordered-buffers)))
+(defun ctrlnum-next-buffer()
+  (+ 1 (cl-position (current-buffer) ctrlnum-ordered-buffers)))
 
-(defun ctrlnum-previous-buffer() (- 1 (cl-position (current-buffer) ctrlnum-ordered-buffers)))
+(defun ctrlnum-previous-buffer()
+  (- 1 (cl-position (current-buffer) ctrlnum-ordered-buffers)))
 
 (defun ctrlnum-switch-order-list-back()
   (progn
