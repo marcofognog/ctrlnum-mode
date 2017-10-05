@@ -33,10 +33,13 @@
 ;; C-1 switches to the first file buffer
 ;; C-2 switches to the second file buffer
 ;; ...
-;; C-0 switched to the 10th file buffer
+;; C-0 switches to the 10th file buffer
 ;;
-;; C-<prior> in buffer causes that buffer to switch place with the previous buffer
-;; C-<next> the same as the above, but in the other direction
+;; C-<prior> switch to the previous buffer
+;; C-<next> switch to the next buffer
+;;
+;; C-S-<prior> in buffer causes that buffer to switch place with the previous buffer
+;; C-S-<next> the same as the above, but in the other direction
 ;;
 ;; Because the native Emacs buffer-list is kept intact, you can still use all the
 ;; other buffer switching tactics you already have.
