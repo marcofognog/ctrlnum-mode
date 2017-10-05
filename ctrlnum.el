@@ -5,7 +5,7 @@
 ;; Author: Marco A. F. Nogueira <marcofognog@gmail.com>
 ;; Version: 1.0
 ;; Package-Requires ((cl-lib "0.5"))
-;; Keywords: buffer, tabs
+;; Keywords: convenience, buffer, tabs
 ;; URL: https://github.com/marcofognog/ctrlnum.el
 
 ;; This file is NOT part of GNU Emacs.
