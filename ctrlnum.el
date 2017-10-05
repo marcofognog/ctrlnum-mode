@@ -34,16 +34,16 @@
 
 ;;; Code:
 
-(setq mybuffs (list))
+(setq ctrlnum-ordered-buffers (list))
 
 (defun ctrlnum-update ()
   "Update the ordered file buffer list."
   (interactive)
   (progn
     (setq file-buffs (seq-filter (lambda (elt) (buffer-file-name elt)) (buffer-list)))
-    (setq mybuffs (append mybuffs (seq-difference file-buffs mybuffs)))
-    (setq mybuffs (seq-filter (lambda (elt) (seq-contains file-buffs elt)) mybuffs))
-    (delete-dups mybuffs) ;; why do we need this?
+    (setq ctrlnum-ordered-buffers (append ctrlnum-ordered-buffers (seq-difference file-buffs ctrlnum-ordered-buffers)))
+    (setq ctrlnum-ordered-buffers (seq-filter (lambda (elt) (seq-contains file-buffs elt)) ctrlnum-ordered-buffers))
+    (delete-dups ctrlnum-ordered-buffers) ;; why do we need this?
     )
   )
 
@@ -60,8 +60,8 @@
 
 (defun ctrlnum-switch (num)
   "Make the switch to a buffer.  Argument NUM : the number in the ordered list to swtich to."
-  (if (< num (length mybuffs))
-      (switch-to-buffer (seq-elt mybuffs num))
+  (if (< num (length ctrlnum-ordered-buffers))
+      (switch-to-buffer (seq-elt ctrlnum-ordered-buffers num))
     nil
     )
   (ctrlnum-print-positions)
@@ -71,7 +71,7 @@
   (progn
     (if (eq (current-buffer) buff) (setq mark "*") (setq mark "") )
     (concat
-     (number-to-string (+ 1 (cl-position buff mybuffs)))
+     (number-to-string (+ 1 (cl-position buff ctrlnum-ordered-buffers)))
      "."
      mark
      (file-name-nondirectory (buffer-file-name buff))
@@ -80,7 +80,7 @@
   )
 
 (defun ctrlnum-print-positions()
-  (setq tabstring (mapconcat 'identity (mapcar 'ctrlnum-build-name mybuffs) " "))
+  (setq tabstring (mapconcat 'identity (mapcar 'ctrlnum-build-name ctrlnum-ordered-buffers) " "))
   (message tabstring)
   )
 
@@ -96,27 +96,27 @@
   (ctrlnum-switch (ctrlnum-previous-buffer))
   )
 
-(defun ctrlnum-next-buffer() (+ 1 (cl-position (current-buffer) mybuffs)))
+(defun ctrlnum-next-buffer() (+ 1 (cl-position (current-buffer) ctrlnum-ordered-buffers)))
 
-(defun ctrlnum-previous-buffer() (- 1 (cl-position (current-buffer) mybuffs)))
+(defun ctrlnum-previous-buffer() (- 1 (cl-position (current-buffer) ctrlnum-ordered-buffers)))
 
 (defun ctrlnum-switch-order-list-back()
   (progn
-    (setq posi (cl-position (current-buffer) mybuffs))
-    (setq first-half (seq-take mybuffs (- posi 1)))
-    (setq last-half (seq-drop mybuffs (+ posi 1)))
+    (setq posi (cl-position (current-buffer) ctrlnum-ordered-buffers))
+    (setq first-half (seq-take ctrlnum-ordered-buffers (- posi 1)))
+    (setq last-half (seq-drop ctrlnum-ordered-buffers (+ posi 1)))
     (setq first-half-p (append first-half (list (current-buffer))))
-    (setq last-half-p (cons (nth (ctrlnum-previous-buffer) mybuffs) last-half))
+    (setq last-half-p (cons (nth (ctrlnum-previous-buffer) ctrlnum-ordered-buffers) last-half))
     (append first-half-p last-half-p)
     )
   )
 
 (defun ctrlnum-switch-order-list-forward()
   (progn
-    (setq posi (cl-position (current-buffer) mybuffs))
-    (setq first-half (seq-take mybuffs posi))
-    (setq last-half (seq-drop mybuffs (+ posi 2)))
-    (setq first-half-p (append first-half (list (nth (ctrlnum-next-buffer) mybuffs))))
+    (setq posi (cl-position (current-buffer) ctrlnum-ordered-buffers))
+    (setq first-half (seq-take ctrlnum-ordered-buffers posi))
+    (setq last-half (seq-drop ctrlnum-ordered-buffers (+ posi 2)))
+    (setq first-half-p (append first-half (list (nth (ctrlnum-next-buffer) ctrlnum-ordered-buffers))))
     (setq last-half-p (cons (current-buffer) last-half))
     (append first-half-p last-half-p)
     )
@@ -126,7 +126,7 @@
   "Rearrange buffer position with the next buffer in the list"
   (interactive)
   (progn
-    (setq mybuffs (ctrlnum-switch-order-list-forward))
+    (setq ctrlnum-ordered-buffers (ctrlnum-switch-order-list-forward))
     (ctrlnum-update)
     (ctrlnum-print-positions)
     )
@@ -136,7 +136,7 @@
   "Rearrange buffer position with the previous buffer in the list"
   (interactive)
   (progn
-    (setq mybuffs (ctrlnum-switch-order-list-back))
+    (setq ctrlnum-ordered-buffers (ctrlnum-switch-order-list-back))
     (ctrlnum-update)
     (ctrlnum-print-positions)
     )
