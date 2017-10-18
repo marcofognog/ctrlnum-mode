@@ -44,8 +44,6 @@
 ;; Because the native Emacs buffer-list is kept intact, you can still use all
 ;; the other buffer switching tactics you already have.
 
-;; Full documentation is available as an Info manual.
-
 ;;; Code:
 
 (setq ctrlnum-ordered-buffers (list))
