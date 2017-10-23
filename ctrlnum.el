@@ -156,7 +156,6 @@
             (define-key map (kbd "C-8") 'ctrlnum-switch-8)
             (define-key map (kbd "C-9") 'ctrlnum-switch-9)
             (define-key map (kbd "C-0") 'ctrlnum-switch-10)
-            (define-key map (kbd "C-c u") 'ctrlnum-update)
             map))
 
 (ctrlnum-update)
