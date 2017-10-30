@@ -20,9 +20,9 @@ the other buffer switching tactics you already have.
 
 ## Demo
 
-### Explanation Cucumber style
-
 ![ctrlnum demo](https://github.com/marcofognog/ctrlnum/blob/master/demo.gif)
+
+### Explanation Cucumber style
 
 ```
 Given I have file buffers and buffers without files,
