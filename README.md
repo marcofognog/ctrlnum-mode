@@ -22,7 +22,7 @@ the other buffer switching tactics you already have.
 
 ### Explanation Cucumber style
 
-![ctrlnum demo](https://github.com/marcofognog/ctrlnum-demo.gif)
+![ctrlnum demo](https://github.com/marcofognog/ctrlnum/blob/master/demo.gif)
 
 ```
 Given I have file buffers and buffers without files,
