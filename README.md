@@ -26,8 +26,7 @@ the other buffer switching tactics you already have.
 
 ```
 Given I have file buffers and buffers without files,
-And I cycle through all the buffers including buffers without files (to show the starting state)
-When I call `ctrlnum-next` function
+By calling `ctrlnum-next` function
 I can cycle forward only among the file buffers
 When I call `C-2` binding (`ctrlnum-switch-2`)
 It switches to the second file buffer
