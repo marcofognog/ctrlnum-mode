@@ -2,7 +2,7 @@
 
 ## tl;dr
 
-Conveniently switch between file buffers just like you would with
+Consistently switch between file buffers just like you would with
 Google Chrome's tabs default key bindings:
 
 `C-1` switches to the first file buffer
