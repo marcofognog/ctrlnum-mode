@@ -41,8 +41,8 @@ And I know `C-2` will always switch to the same file, until I change that
  ctrlnum-switch-n          | Switch to the nth file buffer                     |
  ctrlnum-next              | Switch to the next (to the right) file buffer     |
  ctrlnum-previous          | Switch to the previous (to the left) file buffer  |
- ctrlnum-switch-order-prev | Switch the position of the buffer to the left     |
- ctrlnum-switch-order-next | Switch the position of the buffer to the right    |
+ ctrlnum-switch-order-prev | Rearrange the position of the buffer to the left  |
+ ctrlnum-switch-order-next | Rearrange the position of the buffer to the right |
 
 ## Installation
 
