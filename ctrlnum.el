@@ -51,11 +51,16 @@
 (defun ctrlnum-update ()
   "Update the ordered file buffer list."
   (interactive)
+  (setq ctrlnum-ordered-buffers (ctrlnum-sync-list ctrlnum-ordered-buffers (buffer-list))))
+
+(defun ctrlnum-sync-list (ordered original)
   (progn
-    (setq file-buffs (seq-filter (lambda (elt) (buffer-file-name elt)) (buffer-list)))
-    (setq ctrlnum-ordered-buffers (append ctrlnum-ordered-buffers (seq-difference file-buffs ctrlnum-ordered-buffers)))
-    (setq ctrlnum-ordered-buffers (seq-filter (lambda (elt) (seq-contains file-buffs elt)) ctrlnum-ordered-buffers))
-    (delete-dups ctrlnum-ordered-buffers)))
+    (setq file-buffs (seq-filter (lambda (elt) (buffer-file-name elt)) original))
+    (setq ordered (append ordered (seq-difference file-buffs ordered)))
+    (setq ordered (seq-filter (lambda (elt) (seq-contains file-buffs elt)) ordered))
+    (delete-dups ordered)
+    )
+  )
 
 (defun ctrlnum-switch-1() (interactive) (ctrlnum-switch 0) )
 (defun ctrlnum-switch-2() (interactive) (ctrlnum-switch 1) )
@@ -158,6 +163,14 @@
 
 (ctrlnum-update)
 (add-hook 'buffer-list-update-hook 'ctrlnum-update)
+
+(ert-deftest ctrlnum-sync-list-test ()
+  (setq buffer-list-ordered (list))
+  (setq buffer-list-origin (list (create-file-buffer "README.md")))
+  (setq result (ctrlnum-sync-list buffer-list-ordered buffer-list-origin))
+  (setq expected 1)
+  (should (= (safe-length result) expected))
+  )
 
 (provide 'ctrlnum)
 
