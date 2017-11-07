@@ -1,4 +1,4 @@
-# Ctrlnum
+# ctrlnum-mode
 
 ## tl;dr
 
